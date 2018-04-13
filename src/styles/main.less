@@ -1,0 +1,34 @@
+.container {
+  width: auto;
+  max-width: 1920px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+}
+
+#app-header {
+  background: #333;
+  color: #fff;
+  padding: 2rem;
+  h1,
+  h2 {
+    display: inline-block;
+    margin: 0 2rem 0 0;
+    font-size: 1em;
+    line-height: 1;
+  }
+  h1 {
+    font-weight: 800;
+  }
+}
+
+@media print {
+  @page {
+    size: landscape;
+  }
+}
