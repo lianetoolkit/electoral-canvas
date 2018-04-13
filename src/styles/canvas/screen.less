@@ -1,0 +1,54 @@
+.canvas-item {
+  padding: 1.5rem;
+  transition: all linear 0.075s;
+  box-shadow: 0 0 0 @borderColor;
+  background: #fff;
+  overflow: auto;
+  &.empty {
+    overflow: hidden;
+  }
+  &:hover {
+    transform: scale(1.025);
+    box-shadow: 0 0 0 1px @borderColor, 0 0 2rem rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+  }
+  .canvas-header {
+    margin: 0 0 1.5rem;
+  }
+  .canvas-content.attached {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    margin-bottom: -1.5rem;
+  }
+}
+.canvas-item:first-child {
+  transform-origin: center left;
+}
+.canvas-item:last-child {
+  transform-origin: center right;
+}
+.canvas-row:first-child {
+  .canvas-item {
+    transform-origin: top center;
+    &:first-child {
+      transform-origin: top left;
+    }
+    &:last-child {
+      transform-origin: top right;
+    }
+  }
+}
+.canvas-row:last-child {
+  .canvas-item {
+    transform-origin: bottom center;
+    &:first-child {
+      transform-origin: bottom left;
+    }
+    &:last-child {
+      transform-origin: bottom right;
+    }
+  }
+}
+.canvas-group {
+  margin-bottom: 0.5rem;
+}
