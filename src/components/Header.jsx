@@ -1,9 +1,6 @@
 import React from "react";
 
 export default class Header extends React.Component {
-  _handleClick() {
-    window.print();
-  }
   render() {
     return (
       <header id="app-header">
@@ -12,7 +9,6 @@ export default class Header extends React.Component {
         <a
           className="button print"
           href="LIANE - Canvas Eleitoral.pdf"
-          // onClick={this._handleClick}
         >
           Imprimir
         </a>
