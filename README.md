@@ -4,7 +4,7 @@
 
 ### Installation
 
-#### Depedencies
+#### Dependencies
 
 * Node (v8 or newer)
 * Chromium or Google Chrome (for PDF generation through [puppeteer](https://github.com/GoogleChrome/puppeteer))
