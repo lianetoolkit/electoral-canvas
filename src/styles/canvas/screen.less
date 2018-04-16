@@ -3,22 +3,90 @@
   transition: all linear 0.075s;
   box-shadow: 0 0 0 @borderColor;
   background: #fff;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  cursor: default;
+  &.featured {
+    box-shadow: inset 0 0 0 0.75rem rgba(0, 0, 0, 0.02);
+  }
+  .canvas-item-icon {
+    transition: all ease-in-out 0.2s;
+  }
+  &.has-details {
+    cursor: pointer;
+  }
   &.empty {
     overflow: hidden;
   }
+  .canvas-item-details-overlay {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all linear 0.2s;
+  }
   &:hover {
+    z-index: 2;
     transform: scale(1.025);
     box-shadow: 0 0 0 1px @borderColor, 0 0 2rem rgba(0, 0, 0, 0.1);
     border-radius: 3px;
+    .canvas-item-icon {
+      transform: rotate(5deg) scale(1.2);
+    }
+    .canvas-item-details-overlay {
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .canvas-item-details-button {
+      display: inline-block;
+      font-size: 0.6em;
+      letter-spacing: 0.1rem;
+      text-transform: uppercase;
+      background: #fff;
+      box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+      padding: 1rem;
+      z-index: 2;
+      border: 1px solid @borderColor;
+      .fa {
+        float: left;
+        font-size: 1.5em;
+        margin-right: 1rem;
+      }
+    }
   }
   .canvas-header {
     margin: 0 0 1.5rem;
+    margin: -1.5rem -1.5rem 1.5rem;
+    span {
+      padding: 1rem 1.5rem;
+    }
   }
   .canvas-content.attached {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
     margin-bottom: -1.5rem;
+  }
+  .canvas-item-details-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+    background: rgba(255, 255, 255, 0.8);
+    .canvas-item-details {
+      max-width: 800px;
+      margin-top: 10%;
+      background: #fff;
+      border-radius: 3px;
+      box-shadow: 0 0 1px @borderColor, 0 0 2rem rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
   }
 }
 .canvas-item:first-child {

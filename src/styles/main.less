@@ -24,7 +24,7 @@ h4 {
 }
 
 #app-header {
-  background: darken(@mainColor, 20%);
+  background: #000;
   color: #fff;
   height: 8%;
   box-sizing: border-box;
@@ -38,24 +38,27 @@ h4 {
     margin: 0;
     text-transform: uppercase;
   }
-  .button {
+  .divider {
     margin-left: auto;
+  }
+  .button {
     border: 0;
     color: #fff;
+    margin-left: 2rem;
   }
 }
 
 .canvas-container {
   height: 92%;
-  .canvas-item .canvas-header span {
-    background: @mainColor;
-    color: #fff;
-    padding: .5em;
-    margin: -.5em;
-    display: inline-block;
+  .canvas-item .canvas-header {
+    span {
+      background: @mainColor;
+      color: #333;
+    }
   }
   .canvas-list .canvas-list-number {
     background: lighten(@mainColor, 20%);
+    color: #333;
   }
 }
 
@@ -86,7 +89,6 @@ h4 {
 @media print {
   @page {
     margin: 0;
-    size: A4 landscape;
   }
   #app-header {
     background: transparent;

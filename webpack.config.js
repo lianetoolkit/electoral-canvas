@@ -12,7 +12,7 @@ module.exports = {
   },
   output: {
     path: path.resolve("public"),
-    publicPath: "/",
+    publicPath: "./",
     filename: function(...args) {
       if (process.env.NODE_ENV == "production") {
         return "[name]-[chunkhash].js";
@@ -28,8 +28,14 @@ module.exports = {
       inject: "body"
     }),
     new GeneratePDF({
-      filename: "LIANE - Canvas Eleitoral.pdf",
-      content: '<div id="app"></div>',
+      filename: "LIANE - Canvas Eleitoral A3.pdf",
+      format: "A3",
+      scale: 1.2,
+      landscape: true
+    }),
+    new GeneratePDF({
+      filename: "LIANE - Canvas Eleitoral A4.pdf",
+      format: "A4",
       landscape: true
     })
   ],
@@ -47,8 +53,16 @@ module.exports = {
         use: ["style-loader", "css-loader", "less-loader"]
       },
       {
-        test: /\.(png|jpg|gif|svg|woff2|woff|eot|ttf|mp4)$/,
-        use: "file-loader"
+        test: /\.(sass|scss)$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
+      },
+      {
+        test: /\.(png|jpg|gif|mp4)$/,
+        use: "file-loader?name=assets/[name].[hash].[ext]"
+      },
+      {
+        test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        use: "file-loader?name=fonts/[name].[ext]&publicPath=./"
       }
     ]
   }

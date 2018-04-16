@@ -30,11 +30,23 @@
 }
 
 .canvas-item {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   flex-grow: 1;
   flex: 1;
+  position: relative;
+  border-bottom: 1px solid lighten(@mainColor, 10%);
+  .canvas-item-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 5vw;
+    margin: -.25rem 1rem;
+    opacity: .1;
+    transform: rotate(10deg);
+  }
   .canvas-header {
     font-size: 0.5em;
     text-transform: uppercase;
@@ -42,6 +54,10 @@
     color: @canvasHeaderColor;
     flex: 0 0 auto;
     font-weight: 300;
+    span {
+      display: inline-block;
+      border-radius: 0 0 3px;
+    }
   }
   .canvas-content {
     flex: 1 1 100%;
@@ -63,6 +79,9 @@
         font-weight: 300;
       }
     }
+  }
+  .canvas-item-details-button {
+    display: none;
   }
 }
 
@@ -89,7 +108,6 @@
   }
   .canvas-list-number {
     font-size: .8em;
-    margin-top: -1em;
     width: 1.5em;
     height: 1.5em;
     line-height: 1.5em;
@@ -99,6 +117,7 @@
     color: #f0f0f0;
     border-radius: 100%;
     text-align: center;
+    float: right;
   }
 }
 

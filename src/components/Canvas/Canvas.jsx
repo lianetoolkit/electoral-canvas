@@ -1,5 +1,6 @@
 import React from "react";
 
+import "styles/canvas/font-awesome.scss";
 import "styles/canvas/canvas.less";
 
 import CanvasItem from "./CanvasItem.jsx";
@@ -9,10 +10,15 @@ import CanvasGroup from "./CanvasGroup.jsx";
 import CanvasField from "./CanvasField.jsx";
 import CanvasTable from "./CanvasTable.jsx";
 
+import CanvasDetails from "./CanvasDetails.jsx";
+
 class Canvas extends React.Component {
   render() {
     return (
-      <section className="canvas-container">{this.props.children}</section>
+      <section className="canvas-container">
+        {this.props.children}
+        <CanvasDetails />
+      </section>
     );
   }
 }
