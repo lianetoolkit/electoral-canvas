@@ -18,7 +18,15 @@ export default class CanvasItem extends React.Component {
     }
   }
   render() {
-    const { icon, featured, details, grow, title, children } = this.props;
+    const {
+      icon,
+      color,
+      featured,
+      details,
+      grow,
+      title,
+      children
+    } = this.props;
     const { active } = this.state;
     let classes = "";
     let contentClasses = "";
@@ -30,6 +38,9 @@ export default class CanvasItem extends React.Component {
     }
     if (featured) {
       classes += " featured";
+    }
+    if (color) {
+      classes += " " + color;
     }
     if (details) {
       classes += " has-details";

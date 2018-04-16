@@ -15,15 +15,16 @@ export default class Application extends React.Component {
         <Header />
         <Canvas>
           <Canvas.Row grow=".4" widths="equal">
-            <Canvas.Item title="Nome da candidata" />
-            <Canvas.Item title="Cargo que concorre" />
-            <Canvas.Item title="Local" />
-            <Canvas.Item title="Partido" />
-            <Canvas.Item title="Número" />
+            <Canvas.Item title="Nome da candidata" color="orange" />
+            <Canvas.Item title="Cargo que concorre" color="orange" />
+            <Canvas.Item title="Local" color="orange" />
+            <Canvas.Item title="Partido" color="orange" />
+            <Canvas.Item title="Número" color="orange" />
           </Canvas.Row>
           <Canvas.Row grow="1.5">
             <Canvas.Item
               title="Causas"
+              color="pink"
               grow="1"
               icon="heart"
               // details="Lorem ipsum dolor sit"
@@ -32,6 +33,7 @@ export default class Application extends React.Component {
             </Canvas.Item>
             <Canvas.Item
               title="Candidata"
+              color="pink"
               grow="3"
               featured
               icon="address-card"
@@ -55,10 +57,10 @@ export default class Application extends React.Component {
             </Canvas.Item>
           </Canvas.Row>
           <Canvas.Row grow="1.2">
-            <Canvas.Item title="Princípios" grow="1" icon="check-circle">
+            <Canvas.Item title="Princípios" color="pink" grow="1" icon="check-circle">
               <Canvas.List title="Princípio" amount={3} />
             </Canvas.Item>
-            <Canvas.Item title="Compromissos" grow="1" icon="list-alt">
+            <Canvas.Item title="Compromissos" color="pink" grow="1" icon="list-alt">
               <Canvas.List title="Compromisso" amount={3} />
             </Canvas.Item>
             <Canvas.Item title="Diferenciais de campanha" grow="3" icon="cubes">
@@ -73,6 +75,7 @@ export default class Application extends React.Component {
               title="Quanto vai custar sua campanha?"
               grow="2.5"
               icon="money"
+              color="green"
             >
               <Canvas.Field title="Valor total de custo" />
             </Canvas.Item>
@@ -80,6 +83,7 @@ export default class Application extends React.Component {
               title="Como você vai arrecadar?"
               grow="4.5"
               icon="money"
+              color="green"
             >
               <Canvas.Field title="Lista de atividades de captação" />
             </Canvas.Item>

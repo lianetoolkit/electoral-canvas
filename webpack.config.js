@@ -30,7 +30,7 @@ module.exports = {
     new GeneratePDF({
       filename: "LIANE - Canvas Eleitoral A3.pdf",
       format: "A3",
-      scale: 1.2,
+      scale: 1.1,
       landscape: true
     }),
     new GeneratePDF({

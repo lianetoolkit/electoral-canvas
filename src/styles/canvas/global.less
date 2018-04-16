@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  padding: .5rem;
 }
 
 .canvas-row {
@@ -11,16 +12,9 @@
   flex-direction: row;
   flex-grow: 1;
   flex: 1;
-  border-bottom: 1px solid @borderColor;
-  &:last-child {
-    border-bottom: 0;
-  }
   .canvas-item {
-    border-right: 1px solid @borderColor;
+    // border-right: 1px solid @borderColor;
     flex: 1;
-    &:last-child {
-      border-right: 0;
-    }
   }
   &.equal {
     .canvas-item {
@@ -37,7 +31,62 @@
   flex-grow: 1;
   flex: 1;
   position: relative;
-  border-bottom: 1px solid lighten(@mainColor, 10%);
+  // background: lighten(@mainColor, 25%);
+  background: #fff;
+  border-width: 1px;
+  border-color: @borderColor;
+  border-style: solid;
+  margin: .5rem;
+  // border-bottom: 1px solid lighten(@mainColor, 10%);
+  border-radius: 4px;
+  .canvas-list-number {
+    background: lighten(@mainColor, 10%);
+  }
+  .canvas-item-icon {
+    color: @mainColor;
+  }
+  &.green {
+    // background: lighten(@green, 40%);
+    // border-color: @green;
+    // border-bottom: 1px solid lighten(@green, 10%);
+    .canvas-item-icon {
+      color: @green;
+    }
+    .canvas-header {
+      span { background: @green; }
+    }
+    .canvas-list-number {
+      background: lighten(@green, 10%);
+    }
+  }
+  &.orange {
+    // background: lighten(@orange, 45%);
+    // border-color: @orange;
+    // border-bottom: 1px solid lighten(@orange, 10%);
+    .canvas-item-icon {
+      color: @orange;
+    }
+    .canvas-header {
+      span { background: @orange; }
+    }
+    .canvas-list-number {
+      background: lighten(@orange, 10%);
+    }
+  }
+  &.pink {
+    // background: lighten(@pink, 25%);
+    // border-color: @pink;
+    // border-bottom: 1px solid lighten(@pink, 10%);
+    .canvas-item-icon {
+      color: @pink;
+    }
+    .canvas-header {
+      span { background: @pink; }
+    }
+    .canvas-list-number {
+      background: lighten(@pink, 10%);
+    }
+  }
   .canvas-item-icon {
     position: absolute;
     right: 0;
@@ -55,8 +104,9 @@
     flex: 0 0 auto;
     font-weight: 300;
     span {
+      background: @mainColor;
       display: inline-block;
-      border-radius: 0 0 3px;
+      border-radius: 3px 0 3px;
     }
   }
   .canvas-content {
@@ -113,7 +163,6 @@
     line-height: 1.5em;
     margin-right: .5em;
     display: inline-block;
-    background: #999;
     color: #f0f0f0;
     border-radius: 100%;
     text-align: center;
