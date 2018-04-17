@@ -5,6 +5,7 @@ import "styles/canvas/canvas.less";
 
 import CanvasItem from "./CanvasItem.jsx";
 import CanvasRow from "./CanvasRow.jsx";
+import CanvasColumn from "./CanvasColumn.jsx";
 import CanvasList from "./CanvasList.jsx";
 import CanvasGroup from "./CanvasGroup.jsx";
 import CanvasField from "./CanvasField.jsx";
@@ -25,6 +26,7 @@ class Canvas extends React.Component {
 
 Canvas.Item = CanvasItem;
 Canvas.Row = CanvasRow;
+Canvas.Column = CanvasColumn;
 Canvas.Group = CanvasGroup;
 Canvas.List = CanvasList;
 Canvas.Field = CanvasField;

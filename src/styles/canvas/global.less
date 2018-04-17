@@ -4,16 +4,15 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: .5rem;
 }
 
-.canvas-row {
+.canvas-row,
+.canvas-column {
   display: flex;
-  flex-direction: row;
   flex-grow: 1;
   flex: 1;
+  box-sizing: border-box;
   .canvas-item {
-    // border-right: 1px solid @borderColor;
     flex: 1;
   }
   &.equal {
@@ -21,6 +20,24 @@
       flex: 1 1 100%;
     }
   }
+}
+
+.canvas-row {
+  flex-direction: row;
+  &.blue {
+    background-color: lighten(@blue, 20%);
+    // border-top: 2px solid @blue;
+    // border-bottom: 2px solid @blue;
+  }
+  &.colored {
+    .canvas-item {
+      border-width: 0;
+    }
+  }
+}
+
+.canvas-column {
+  flex-direction: column;
 }
 
 .canvas-item {
@@ -31,13 +48,10 @@
   flex-grow: 1;
   flex: 1;
   position: relative;
-  // background: lighten(@mainColor, 25%);
-  background: #fff;
+  background: rgba(255,255,255,0.85);
   border-width: 1px;
   border-color: @borderColor;
   border-style: solid;
-  margin: .5rem;
-  // border-bottom: 1px solid lighten(@mainColor, 10%);
   border-radius: 4px;
   .canvas-list-number {
     background: lighten(@mainColor, 10%);
@@ -46,42 +60,52 @@
     color: @mainColor;
   }
   &.green {
-    // background: lighten(@green, 40%);
-    // border-color: @green;
-    // border-bottom: 1px solid lighten(@green, 10%);
     .canvas-item-icon {
       color: @green;
     }
     .canvas-header {
-      span { background: @green; }
+      span {
+        background: @green;
+      }
     }
     .canvas-list-number {
       background: lighten(@green, 10%);
     }
   }
   &.orange {
-    // background: lighten(@orange, 45%);
-    // border-color: @orange;
-    // border-bottom: 1px solid lighten(@orange, 10%);
     .canvas-item-icon {
       color: @orange;
     }
     .canvas-header {
-      span { background: @orange; }
+      span {
+        background: @orange;
+      }
     }
     .canvas-list-number {
       background: lighten(@orange, 10%);
     }
   }
+  &.blue {
+    .canvas-item-icon {
+      color: @blue;
+    }
+    .canvas-header {
+      span {
+        background: @blue;
+      }
+    }
+    .canvas-list-number {
+      background: lighten(@blue, 10%);
+    }
+  }
   &.pink {
-    // background: lighten(@pink, 25%);
-    // border-color: @pink;
-    // border-bottom: 1px solid lighten(@pink, 10%);
     .canvas-item-icon {
       color: @pink;
     }
     .canvas-header {
-      span { background: @pink; }
+      span {
+        background: @pink;
+      }
     }
     .canvas-list-number {
       background: lighten(@pink, 10%);
@@ -92,19 +116,19 @@
     right: 0;
     top: 0;
     font-size: 5vw;
-    margin: -.25rem 1rem;
-    opacity: .1;
+    margin: -0.25rem 1rem;
+    opacity: 0.1;
     transform: rotate(10deg);
   }
   .canvas-header {
     font-size: 0.5em;
     text-transform: uppercase;
-    letter-spacing: 0.25rem;
-    color: @canvasHeaderColor;
+    letter-spacing: 0.15rem;
     flex: 0 0 auto;
-    font-weight: 300;
+    font-weight: 600;
     span {
       background: @mainColor;
+      color: @canvasHeaderColor;
       display: inline-block;
       border-radius: 3px 0 3px;
     }
@@ -121,12 +145,15 @@
       font-weight: 600;
       text-transform: uppercase;
       margin: 0;
-      padding-top: .5em;
-      padding-bottom: .5em;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
       box-sizing: border-box;
       border-bottom: 1px solid @borderColor;
       span {
         font-weight: 300;
+      }
+      .canvas-list-number {
+        font-weight: 800;
       }
     }
   }
@@ -157,16 +184,16 @@
     padding: 0;
   }
   .canvas-list-number {
-    font-size: .8em;
+    font-size: 1em;
     width: 1.5em;
     height: 1.5em;
     line-height: 1.5em;
-    margin-right: .5em;
     display: inline-block;
-    color: #f0f0f0;
+    color: #fff;
     border-radius: 100%;
     text-align: center;
     float: right;
+    font-weight: 800;
   }
 }
 
@@ -182,7 +209,7 @@
     border-right: 1px solid @borderColor;
   }
   th {
-    padding: .5em 1em;
+    padding: 0.5em 1em;
     border-bottom: 1px solid @borderColor;
   }
   td {
@@ -190,7 +217,7 @@
   }
   th:last-child,
   td:last-child {
-    border-right: 1px solid @borderColor;
+    border-right: 0;
   }
   &.numbered {
     td {

@@ -28,6 +28,12 @@ module.exports = {
       inject: "body"
     }),
     new GeneratePDF({
+      filename: "LIANE - Canvas Eleitoral A2.pdf",
+      format: "A2",
+      scale: 1.25,
+      landscape: true
+    }),
+    new GeneratePDF({
       filename: "LIANE - Canvas Eleitoral A3.pdf",
       format: "A3",
       scale: 1.1,
@@ -36,13 +42,14 @@ module.exports = {
     new GeneratePDF({
       filename: "LIANE - Canvas Eleitoral A4.pdf",
       format: "A4",
+      scale: 0.9,
       landscape: true
     })
   ],
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.js(x)?$/,
         use: {
           loader: "babel-loader"
         },
@@ -57,12 +64,12 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
-        test: /\.(png|jpg|gif|mp4)$/,
-        use: "file-loader?name=assets/[name].[hash].[ext]"
+        test: /fonts\/(.*)\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        use: "file-loader?name=fonts/[name].[ext]&publicPath=./"
       },
       {
-        test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        use: "file-loader?name=fonts/[name].[ext]&publicPath=./"
+        test: /\.(png|jpg|svg|gif|mp4)$/,
+        use: "file-loader?name=assets/[name].[hash].[ext]&publicPath=./"
       }
     ]
   }

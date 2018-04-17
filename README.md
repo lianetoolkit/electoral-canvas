@@ -34,3 +34,10 @@ You can run a webserver to access interactive web version with PDF download link
 $ cd public/
 $ python -m SimpleHTTPServer
 ```
+
+### Credits
+
+#### Icons
+
+ - [FontAwesome](https://fontawesome.com/)
+ - [Swen-Peter Ekkebus](https://thenounproject.com/ekkebus/)
