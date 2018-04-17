@@ -53,11 +53,9 @@
   border-color: @borderColor;
   border-style: solid;
   border-radius: 4px;
-  .canvas-list-number {
-    background: lighten(@mainColor, 10%);
-  }
-  .canvas-item-icon {
-    color: @mainColor;
+  &.featured {
+    background: #fff;
+    z-index: 2;
   }
   &.green {
     .canvas-item-icon {
@@ -110,6 +108,12 @@
     .canvas-list-number {
       background: lighten(@pink, 10%);
     }
+  }
+  .canvas-list-number {
+    background: lighten(@mainColor, 10%);
+  }
+  .canvas-item-icon {
+    color: @mainColor;
   }
   .canvas-item-icon {
     position: absolute;
