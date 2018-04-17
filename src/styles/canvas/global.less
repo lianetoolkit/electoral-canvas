@@ -48,7 +48,7 @@
   flex-grow: 1;
   flex: 1;
   position: relative;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   border-width: 1px;
   border-color: @borderColor;
   border-style: solid;
@@ -230,5 +230,17 @@
     tr:last-child td {
       border-bottom: 0;
     }
+  }
+}
+
+@media only screen (min-width: 801px) and (max-width: 1000px) {
+  .canvas-container {
+    font-size: 0.8em;
+  }
+}
+
+@media only screen (min-width: 701px) and (max-width: 800px) {
+  .canvas-container {
+    font-size: 0.7em;
   }
 }
