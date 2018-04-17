@@ -185,14 +185,12 @@ h4 {
   }
 }
 
-@media print {
+@media only print {
   @page {
     margin: 0;
     size: landscape;
   }
   #app-header {
-    // background: transparent;
-    // color: #000;
     padding: 0 .25cm;
     border-bottom: 1px solid @borderColor;
     height: 5%;
@@ -212,6 +210,6 @@ h4 {
     height: 92%;
   }
   .download {
-    display: none;
+    display: none !important;
   }
 }
