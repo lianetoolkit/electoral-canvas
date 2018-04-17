@@ -65,11 +65,11 @@ h4 {
     font-size: 0.8em;
     color: #999;
     letter-spacing: .2rem;
+    display: flex;
+    align-items: center;
     .fa {
-      float: left;
       margin: 0 1rem 0 0;
       font-size: 1.5em;
-      line-height: 1;
     }
     a {
       padding: 0.5rem 1rem;
@@ -79,16 +79,18 @@ h4 {
       color: #f0f0f0;
       text-decoration: none;
       outline: none;
+      display: inline-block;
       &:hover,
       &:active,
       &:focus {
         background: #000;
-        box-shadow: 0 0 1rem #111;
+        box-shadow: 0 0 1rem #090909;
       }
       .fa {
         font-size: 1em;
         float: none;
         margin: 0 0.5rem 0 0;
+        line-height: 1;
       }
     }
     .label {
