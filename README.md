@@ -2,6 +2,8 @@
 
 ## Electoral Canvas
 
+Electoral Canvas built with [react-flexcanvas](https://github.com/miguelpeixe/react-flexcanvas).
+
 ### Installation
 
 #### Dependencies
@@ -39,5 +41,5 @@ $ python -m SimpleHTTPServer
 
 #### Icons
 
- - [FontAwesome](https://fontawesome.com/)
- - [Swen-Peter Ekkebus](https://thenounproject.com/ekkebus/)
+* [FontAwesome](https://fontawesome.com/)
+* [Swen-Peter Ekkebus](https://thenounproject.com/ekkebus/)
