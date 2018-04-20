@@ -4,6 +4,10 @@
 
 Electoral Canvas built with [react-flexcanvas](https://github.com/miguelpeixe/react-flexcanvas).
 
+![FlexCanvas Example](https://i.imgur.com/iJlAVoM.png)
+
+---
+
 ### Installation
 
 #### Dependencies
