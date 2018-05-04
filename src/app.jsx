@@ -27,13 +27,12 @@ export default class Application extends React.Component {
             <Canvas.Column grow={5}>
               <Canvas.Row grow={2}>
                 <Canvas.Item
-                  title="Causas"
+                  title="Princípios"
                   color="pink"
                   grow={1}
-                  icon={<span className="fa fa-heart" />}
-                  // details="Lorem ipsum dolor sit"
+                  icon={<span className="fa fa-check-circle" />}
                 >
-                  <Canvas.List title="Causa" amount={3} />
+                  <Canvas.List title="Princípio" amount={3} />
                 </Canvas.Item>
                 <Canvas.Item
                   title="Candidata"
@@ -63,12 +62,13 @@ export default class Application extends React.Component {
               </Canvas.Row>
               <Canvas.Row grow={2}>
                 <Canvas.Item
-                  title="Princípios"
+                  title="Causas"
                   color="pink"
                   grow={1}
-                  icon={<span className="fa fa-check-circle" />}
+                  icon={<span className="fa fa-heart" />}
+                  // details="Lorem ipsum dolor sit"
                 >
-                  <Canvas.List title="Princípio" amount={3} />
+                  <Canvas.List title="Causa" amount={3} />
                 </Canvas.Item>
                 <Canvas.Item
                   title="Compromissos"
@@ -80,6 +80,7 @@ export default class Application extends React.Component {
                 </Canvas.Item>
                 <Canvas.Item
                   title="Eleitorado"
+                  color="red"
                   grow={3}
                   icon={<span className="fa fa-filter" />}
                 >
