@@ -88,7 +88,7 @@ export default class CanvasContainer extends React.Component {
               className="data-canvas"
               ref={this.canvasRef}
               style={{
-                transform: `scale(${scale}) translateZ(0) translate3d(0, 0, 0)`
+                transform: `perspective(1px) translateZ(0) scale(${scale},${scale})`
               }}
             >
               <Canvas data={data} />
