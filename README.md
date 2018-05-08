@@ -6,6 +6,10 @@ Electoral Canvas built with [react-flexcanvas](https://github.com/miguelpeixe/re
 
 ![FlexCanvas Example](https://i.imgur.com/iJlAVoM.png)
 
+### Features
+
+ - Generate PDFs in A3 and A2 formats with custom data (sent through POST request).
+
 ---
 
 ### Installation
@@ -13,35 +17,48 @@ Electoral Canvas built with [react-flexcanvas](https://github.com/miguelpeixe/re
 #### Dependencies
 
 * Node (v8 or newer)
-* Chromium or Google Chrome (for PDF generation through [puppeteer](https://github.com/GoogleChrome/puppeteer))
+* Redis
 
 ---
 
 #### Clone and build
 
-Clone the repository, install dependencies and build:
+Clone the repository, install dependencies and start the server:
 
 ```
 $ git clone https://github.com/lianetoolkit/electoral-canvas.git
 $ cd electoral-canvas
 $ npm install
-$ npm run build
+$ npm start
 ```
 
-Generated files, including PDF, will be at the `public/` directory.
+Starting the server will run babel server with nodemon, serving the client with webpack dev middleware with hot module replacement enabled.
+
+Access http://localhost:8000/
 
 ---
 
-### Serving the canvas
+#### Environment variables
 
-You can run a webserver to access interactive web version with PDF download link. E.g. with python http server:
+ - `NODE_ENV` - Either development or production. *Default to `development`*
+ - `PORT` - Port to start the server. *Default to `8000`*
+ - `REDIS` - Redis path. *Default to `redis://localhost:6379/electoral-canvas`*
 
-```
-$ cd public/
-$ python -m SimpleHTTPServer
-```
+---
+
+### Build and run for production
+
+Build the server and client with `npm run build` and start the server with `npm run serve`.
+
+Compiled server will be at `dist/`, while client will be compiled at `public/`.
+
+---
 
 ### Credits
+
+#### Authors
+
+ - [Miguel Peixe](https://github.com/miguelpeixe)
 
 #### Icons
 

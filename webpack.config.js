@@ -3,49 +3,42 @@ const webpack = require("webpack");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const GeneratePDF = require("./lib/pdf-webpack-plugin");
 
+const ENV = process.env.NODE_ENV;
+
+const hotMiddlewareScript =
+  "webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true";
+
+let entry = ["./client/index.jsx"];
+let plugins = [
+  new HTMLWebpackPlugin({
+    template: path.resolve("client", "index.html"),
+    filename: "index.html",
+    inject: "body"
+  })
+];
+
+if (ENV !== "production") {
+  plugins = [...plugins, new webpack.HotModuleReplacementPlugin()];
+  entry = [...entry, hotMiddlewareScript];
+}
+
 module.exports = {
-  entry: {
-    main: ["babel-polyfill", "./src/index.jsx"]
-  },
+  entry,
   resolve: {
-    modules: ["src", "node_modules"]
+    modules: ["client", "node_modules"]
   },
   output: {
     path: path.resolve("public"),
-    publicPath: "./",
+    publicPath: "/",
     filename: function(...args) {
-      if (process.env.NODE_ENV == "production") {
-        return "[name]-[chunkhash].js";
+      if (ENV == "production") {
+        return "[name]-[hash].js";
       } else {
         return "[name].js";
       }
     }
   },
-  plugins: [
-    new HTMLWebpackPlugin({
-      template: path.resolve("src", "index.html"),
-      filename: "index.html",
-      inject: "body"
-    }),
-    new GeneratePDF({
-      filename: "LIANE - Canvas Eleitoral A2.pdf",
-      format: "A2",
-      scale: 1.25,
-      landscape: true
-    }),
-    new GeneratePDF({
-      filename: "LIANE - Canvas Eleitoral A3.pdf",
-      format: "A3",
-      scale: 1.1,
-      landscape: true
-    }),
-    new GeneratePDF({
-      filename: "LIANE - Canvas Eleitoral A4.pdf",
-      format: "A4",
-      scale: 0.9,
-      landscape: true
-    })
-  ],
+  plugins,
   module: {
     rules: [
       {

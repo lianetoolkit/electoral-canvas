@@ -1,0 +1,20 @@
+version: '2'
+services:
+  app:
+    image: miguelpeixe/electoral-canvas:latest
+    build: .
+    command: npm start
+    links:
+    - redis
+    ports:
+    - 8000:8000
+    volumes:
+    - ./.data/files:/canvas/files
+    environment:
+      NODE_ENV: production
+      URL: "http://localhost:8000"
+      REDIS: "redis://redis:6379"
+  redis:
+    image: redis
+    volumes:
+    - ./.data/redis:/data
