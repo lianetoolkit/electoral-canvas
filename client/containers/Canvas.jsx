@@ -40,7 +40,7 @@ export default class CanvasContainer extends React.Component {
       const canvas = this.canvasRef.current;
       const width = container.offsetWidth;
       this.setState({
-        scale: width / 1587
+        scale: Math.floor(width / 1587 * 100) / 100
       });
     },
     100,
@@ -77,8 +77,8 @@ export default class CanvasContainer extends React.Component {
   render() {
     const { id } = this.props;
     const { errored, loading, scale, data } = this.state;
-    if(errored) {
-      return <NotFound />
+    if (errored) {
+      return <NotFound />;
     }
     if (id) {
       return (
