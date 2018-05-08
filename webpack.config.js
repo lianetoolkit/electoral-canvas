@@ -1,7 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
-const GeneratePDF = require("./lib/pdf-webpack-plugin");
 
 const ENV = process.env.NODE_ENV;
 
