@@ -69,11 +69,27 @@ export default class Canvas extends React.Component {
         parsed.push(
           <span>
             <strong>{profile.tag}</strong> - {profile.name}{" "}
-            {this._label(profile.demographics.age + " anos")}
+            {this._label(
+              profile.demographics && profile.demographics.age
+                ? profile.demographics.age + " anos"
+                : ""
+            )}
             {this._label(profile.location)}
-            {this._label("Ensino " + education[profile.demographics.education])}
-            {this._label(race[profile.demographics.ethnicity])}
-            {this._label(gender[profile.demographics.gender])}
+            {this._label(
+              profile.demographics && profile.demographics.education
+                ? "Ensino " + education[profile.demographics.education]
+                : ""
+            )}
+            {this._label(
+              profile.demographics && profile.demographics.ethnicity
+                ? race[profile.demographics.ethnicity]
+                : ""
+            )}
+            {this._label(
+              profile.demographics && profile.demographics.gender
+                ? gender[profile.demographics.gender]
+                : ""
+            )}
           </span>
         );
       });
