@@ -4,6 +4,7 @@ ARG UID=991
 ARG GID=991
 
 ENV NODE_ENV=production
+ENV URL=http://localhost:8000
 ENV CHROMIUM_PATH=/usr/bin/chromium-browser
 
 EXPOSE 3030

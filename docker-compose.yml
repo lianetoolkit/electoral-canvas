@@ -11,8 +11,6 @@ services:
     volumes:
     - ./.data/files:/canvas/files
     environment:
-      NODE_ENV: production
-      URL: "http://localhost:8000"
       REDIS: "redis://redis:6379"
   redis:
     image: redis
