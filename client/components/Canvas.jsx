@@ -63,8 +63,8 @@ export default class Canvas extends React.Component {
     return null;
   }
   _handleElectorate = profiles => {
-    let parsed = [];
     if (profiles && profiles.length) {
+      let parsed = [];
       profiles.forEach((profile, i) => {
         parsed.push(
           <span>
@@ -77,8 +77,9 @@ export default class Canvas extends React.Component {
           </span>
         );
       });
+      return parsed;
     }
-    return parsed;
+    return profiles;
   };
   render() {
     const { data } = this.props;

@@ -9,6 +9,7 @@ import path from "path";
 const FILES_DIR = path.join(__dirname, "../files");
 const FORMATS = ["A3", "A2"];
 const URL = process.env.URL || "http://localhost:8000";
+const REDIS = process.env.REDIS || "redis://localhost:6379/electoral-canvas"
 
 let puppeteerConfig = {
   args: ["--no-sandbox", "--disable-setuid-sandbox"]
@@ -32,9 +33,7 @@ setTimeout(async () => {
 }, 10000);
 
 const app = express();
-const redis = new Redis(
-  process.env.REDIS || "redis://localhost:6379/electoral-canvas"
-);
+const redis = new Redis(REDIS);
 
 redis.on("connect", () => {
   console.log("Connected to redis server");
