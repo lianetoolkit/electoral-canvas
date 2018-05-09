@@ -9,7 +9,7 @@ import path from "path";
 const FILES_DIR = path.join(__dirname, "../files");
 const FORMATS = ["A3", "A2"];
 const URL = process.env.URL || "http://localhost:8000";
-const REDIS = process.env.REDIS || "redis://localhost:6379/electoral-canvas"
+const REDIS = process.env.REDIS || "redis://localhost:6379/electoral-canvas";
 
 let puppeteerConfig = {
   args: ["--no-sandbox", "--disable-setuid-sandbox"]
@@ -94,7 +94,10 @@ const parseFromLiane = function(canvas) {
     result.principles = result.principles.principles.map(p => p.title);
   }
   if (result.assets && result.assets.assets) {
-    result.assets = result.assets.assets.map(p => p.description).join("; ");
+    result.assets = result.assets.assets.map(p => p.description).join(";\n");
+  }
+  if (result.network && result.network.competitors) {
+    result.competitors = result.network.competitors.map(c => [c.name, c.party]);
   }
   if (result.team && result.team.team) {
     result.team = result.team.team.map(t => [t.name, t.role]);
