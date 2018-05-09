@@ -24,6 +24,13 @@ export default class Application extends React.Component {
             <Route exact path="/" component={Canvas} />
             <Route
               exact
+              path="/example"
+              render={() => {
+                return <Canvas id="example" />;
+              }}
+            />
+            <Route
+              exact
               path="/:id"
               strict
               render={({ match }) => {

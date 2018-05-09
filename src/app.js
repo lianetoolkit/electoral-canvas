@@ -28,6 +28,7 @@ if (!fs.existsSync(FILES_DIR)) {
 setTimeout(async () => {
   for (const format of FORMATS) {
     await render(null, "default", format);
+    await render("example", null, format);
   }
   console.log("Default PDF rendered");
 }, 10000);
@@ -106,7 +107,20 @@ const parseFromLiane = function(canvas) {
     result.electorate = result.potential_voter.profiles.map(profile => {
       return {
         ...profile,
-        location: profile.territory ? profile.territory.location.city.name : ""
+        location: {
+          city:
+            profile.territory && profile.territory.location.city
+              ? profile.territory.location.city.name
+              : "",
+          neighbourhood:
+            profile.territory && profile.territory.neighbourhood
+              ? profile.territory.neighbourhood
+              : "",
+          locus:
+            profile.territory && profile.territory.locus
+              ? profile.territory.locus
+              : ""
+        }
       };
     });
   }
@@ -173,6 +187,10 @@ app.get(/^\/(\b[0-9a-f]{5,40}\b)$/, (req, res) => {
     .catch(err => {
       res.status(500).send(err);
     });
+});
+
+app.get("/example", (req, res) => {
+  res.send(require("./example.json").data);
 });
 
 export default app;

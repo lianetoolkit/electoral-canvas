@@ -1,0 +1,90 @@
+{
+  "data": {
+    "basic_info": {
+      "location": "Chicago",
+      "name_bb": "Barack Obama",
+      "party_name": "Partido Democrata",
+      "age": "56",
+      "occupation": "Advogado",
+      "electoral_post": "Presidência"
+    },
+    "candidate": {
+      "positive_characteristic": "Sou experiente e representativo",
+      "limitation": "Não posso ser reeleito",
+      "negative_characteristic": "Gosto por drones de guerra",
+      "talent": "Falo muito bem / sou engraçado",
+      "life_experience": "Quando venci a primeira eleição em 2008"
+    },
+    "principles": ["Transparência", "Diplomacia", "Abertura"],
+    "causes": ["ObamaCare", "Casamento LGBT", "Fim do embargo à Cuba"],
+    "commitments": [
+      "Cumprir meu mandato até o fim",
+      "Só usar o serviço secreto quando necessário",
+      "Não utilizar tortura no meu governo"
+    ],
+    "assets":
+      "Meu carisma;\nA Michelle;\nSer o primeiro presidente negro dos EUA;\nMinha trajetória em direitos humanos",
+    "team": [
+      ["David Axelrod", "communication"],
+      ["David Plouffe", "general_coordination"],
+      ["Penny Pritzker", "finance"]
+    ],
+    "funds": {
+      "expense": "1 bilhão de dólares",
+      "funders":
+        "Crowdfunding\nDoação de empresas\nDoação do Partido Democrata"
+    },
+    "competitors": [
+      ["John McCain", "Republicano"],
+      ["Mitt Romney", "Republicano"]
+    ],
+    "electorate": [
+      {
+        "name": "Michelle",
+        "tag": "Mulher Negra Empoderada",
+        "demographics": {
+          "age": "54",
+          "gender": "cis_woman",
+          "ehtnicity": "Negra",
+          "education": "college",
+          "social_class": "medium_high",
+          "ethnicity": "black"
+        },
+        "location": {
+          "neighbourhood": "South Shore",
+          "city": "Chicaco",
+          "locus": "Teatros; Cafés; Universidades; Instagram"
+        }
+      },
+      {
+        "name": "Tom",
+        "demographics": {
+          "age": "61",
+          "gender": "cis_man",
+          "ethnicity": "white",
+          "education": "college",
+          "social_class": "high"
+        },
+        "location": {
+          "city": "Hollywood Riviera"
+        },
+        "tag": "Ator de Hollywood Progressista"
+      },
+      {
+        "name": "Kevin",
+        "demographics": {
+          "age": "20",
+          "gender": "cis_man",
+          "ethnicity": "black",
+          "education": "high",
+          "social_class": "low"
+        },
+        "location": {
+          "neighbourhood": "Harlem",
+          "city": "New York"
+        },
+        "tag": "Jovem Negro de classe baixa"
+      }
+    ]
+  }
+}

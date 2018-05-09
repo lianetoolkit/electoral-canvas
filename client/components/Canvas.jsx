@@ -83,28 +83,43 @@ export default class Canvas extends React.Component {
       profiles.forEach((profile, i) => {
         parsed.push(
           <span>
-            <strong>{profile.tag}</strong> - {profile.name}{" "}
+            <strong>{profile.tag}</strong>:{" "}
             {this._label(
-              profile.demographics && profile.demographics.age
-                ? profile.demographics.age + " anos"
+              profile.demographics && profile.demographics.gender
+                ? gender[profile.demographics.gender]
                 : ""
-            )}
-            {this._label(profile.location)}
-            {this._label(
-              profile.demographics && profile.demographics.education
-                ? "Ensino " + education[profile.demographics.education]
-                : ""
-            )}
+            )}{" "}
             {this._label(
               profile.demographics && profile.demographics.ethnicity
                 ? race[profile.demographics.ethnicity]
                 : ""
             )}
             {this._label(
-              profile.demographics && profile.demographics.gender
-                ? gender[profile.demographics.gender]
+              profile.demographics && profile.demographics.age
+                ? ", " + profile.demographics.age + " anos"
                 : ""
-            )}
+            )}{" "}
+            {this._label(
+              profile.demographics && profile.demographics.education
+                ? "com ensino " +
+                  education[profile.demographics.education].toLowerCase()
+                : ""
+            )}.{" "}
+            {profile.location &&
+            (profile.location.neighbourhood || profile.location.city) ? (
+              <span>
+                Mora em{" "}
+                {profile.location.neighbourhood ? (
+                  <span>{profile.location.neighbourhood}, </span>
+                ) : null}
+                {profile.location.city ? (
+                  <span>{profile.location.city}</span>
+                ) : null}.{" "}
+              </span>
+            ) : null}
+            {profile.location.locus ? (
+              <span>Frequenta {profile.location.locus}</span>
+            ) : null}
           </span>
         );
       });

@@ -36,6 +36,9 @@ class Header extends React.Component {
           </h2>
         </div>
         <div className="divider" />
+        <nav className="header-nav">
+          <Link to="/example">Veja um exemplo</Link>
+        </nav>
         <nav className="download">
           <span className="fa fa-download" />
           <a href={this._getPDFUrl("A3")}>

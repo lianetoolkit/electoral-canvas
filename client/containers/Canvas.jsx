@@ -50,8 +50,11 @@ export default class CanvasContainer extends React.Component {
     }
   );
   componentDidMount() {
-    const { id } = this.props;
-    if (id) {
+    const { id, data } = this.props;
+    if (data) {
+      console.log(data);
+      this.setState({ data });
+    } else if (id) {
       this._update(id);
       this._scale();
       window.addEventListener("resize", this._scale);
@@ -80,7 +83,7 @@ export default class CanvasContainer extends React.Component {
     if (errored) {
       return <NotFound />;
     }
-    if (id) {
+    if (id || data) {
       return (
         <div ref={this.containerRef} className="data-canvas-container">
           {id && !data ? null : (
