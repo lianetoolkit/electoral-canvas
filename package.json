@@ -7,7 +7,7 @@
     "start": "nodemon src/index.js --exec babel-node --presets es2015,stage-0",
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "rm -rf public/* dist/*",
-    "build": "npm run setup && cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production && babel src -d dist --presets es2015,stage-0",
+    "build": "npm run setup && cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production && babel src -d dist --presets es2015,stage-0 --copy-files",
     "serve": "cross-env NODE_ENV=production node dist/index.js"
   },
   "repository": {
