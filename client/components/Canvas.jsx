@@ -1,5 +1,7 @@
 import React from "react";
 import FlexCanvas from "react-flexcanvas";
+import ReactMarkdown from "react-markdown";
+import breaks from "remark-breaks";
 import Label from "components/Label.jsx";
 
 const roles = {
@@ -46,6 +48,24 @@ const socialClass = {
 };
 
 export default class Canvas extends React.Component {
+  _format = key => data => {
+    switch (key) {
+      case "electorate":
+        return this._handleElectorate(data);
+      case "team":
+        return this._handleTeam(data);
+      default:
+        if (typeof data == "string")
+          return <ReactMarkdown source={data} plugins={[breaks]} />;
+        return data;
+    }
+  };
+  _label(str) {
+    if (str) {
+      return <Label>{str}</Label>;
+    }
+    return null;
+  }
   _handleTeam = members => {
     if (members) {
       members.forEach((member, i) => {
@@ -56,12 +76,6 @@ export default class Canvas extends React.Component {
     }
     return members;
   };
-  _label(str) {
-    if (str) {
-      return <Label>{str}</Label>;
-    }
-    return null;
-  }
   _handleElectorate = profiles => {
     if (profiles && profiles.length) {
       let parsed = [];
@@ -146,7 +160,6 @@ export default class Canvas extends React.Component {
                 grow={3}
                 featured
                 icon={<span className="fa fa-address-card" />}
-                // details={<p>Dolor sit</p>}
               >
                 <FlexCanvas.FieldGroup>
                   <FlexCanvas.Field
@@ -172,6 +185,7 @@ export default class Canvas extends React.Component {
                   title="Uma experiência de vida"
                   grow={2}
                   dataKey="candidate.life_experience"
+                  format={this._format()}
                 />
               </FlexCanvas.Item>
               <FlexCanvas.Item
@@ -182,6 +196,7 @@ export default class Canvas extends React.Component {
                 <FlexCanvas.Field
                   title="O que eu tenho que meus competidores não tem"
                   dataKey="assets"
+                  format={this._format()}
                 />
               </FlexCanvas.Item>
             </FlexCanvas.Row>
@@ -191,7 +206,6 @@ export default class Canvas extends React.Component {
                 color="pink"
                 grow={1}
                 icon={<span className="fa fa-heart" />}
-                // details="Lorem ipsum dolor sit"
                 dataKey="causes"
               >
                 <FlexCanvas.List title="Causa" amount={3} />
@@ -211,7 +225,7 @@ export default class Canvas extends React.Component {
                 grow={3}
                 icon={<span className="fa fa-filter" />}
                 dataKey="electorate"
-                format={this._handleElectorate}
+                format={this._format("electorate")}
               >
                 <FlexCanvas.List title="Perfil" amount={3} />
               </FlexCanvas.Item>
@@ -226,6 +240,7 @@ export default class Canvas extends React.Component {
                 <FlexCanvas.Field
                   title="Valor total de custo"
                   dataKey="funds.expense"
+                  format={this._format()}
                 />
               </FlexCanvas.Item>
               <FlexCanvas.Item
@@ -237,6 +252,7 @@ export default class Canvas extends React.Component {
                 <FlexCanvas.Field
                   title="Lista de atividades de captação"
                   dataKey="funds.funders"
+                  format={this._format()}
                 />
               </FlexCanvas.Item>
             </FlexCanvas.Row>
@@ -253,7 +269,7 @@ export default class Canvas extends React.Component {
               title="Equipe"
               icon={<span className="fa fa-users" />}
               dataKey="team"
-              format={this._handleTeam}
+              format={this._format("team")}
             >
               <FlexCanvas.Table columns={["Nome", "Cargo"]} />
             </FlexCanvas.Item>
