@@ -154,8 +154,7 @@ app.post("/", (req, res) => {
         }
       })
       .catch(err => {
-        console.log(err);
-        res.send({ error: true });
+        res.status.(500).send(err);
       });
   });
 });
@@ -172,7 +171,7 @@ app.get(/^\/(\b[0-9a-f]{5,40}\b)$/, (req, res) => {
       }
     })
     .catch(err => {
-      console.log(err);
+      res.status(500).send(err);
     });
 });
 
