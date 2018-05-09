@@ -6,6 +6,8 @@ import crypto from "crypto";
 import fs from "fs";
 import path from "path";
 
+import example from "./example.json";
+
 const FILES_DIR = path.join(__dirname, "../files");
 const FORMATS = ["A3", "A2"];
 const URL = process.env.URL || "http://localhost:8000";
@@ -30,7 +32,7 @@ setTimeout(async () => {
     await render(null, "default", format);
     await render("example", null, format);
   }
-  console.log("Default PDF rendered");
+  console.log("Default and examples rendered");
 }, 10000);
 
 const app = express();
@@ -190,7 +192,7 @@ app.get(/^\/(\b[0-9a-f]{5,40}\b)$/, (req, res) => {
 });
 
 app.get("/example", (req, res) => {
-  res.send(require("./example.json").data);
+  res.send(example.data);
 });
 
 export default app;
