@@ -8,6 +8,9 @@ import path from "path";
 
 import example from "./example.json";
 
+const VERSION =
+  process.env.VERSION ||
+  require(path.resolve(__dirname, "../package.json")).version;
 const FILES_DIR = path.join(__dirname, "../files");
 const FORMATS = ["A3", "A2"];
 const URL = process.env.URL || "http://localhost:8000";
@@ -143,7 +146,7 @@ app.post("/", (req, res) => {
 
   const hash = crypto
     .createHash("sha1")
-    .update(JSON.stringify(canvas))
+    .update(JSON.stringify(canvas) + VERSION)
     .digest("hex");
 
   const id = hash.substr(0, 7);

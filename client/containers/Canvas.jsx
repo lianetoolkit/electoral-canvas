@@ -25,6 +25,7 @@ export default class CanvasContainer extends React.Component {
           loading: false,
           data: res.data
         });
+        this._scale();
       })
       .catch(err => {
         this.setState({
@@ -37,11 +38,11 @@ export default class CanvasContainer extends React.Component {
   _scale = debounce(
     () => {
       const container = this.containerRef.current;
-      const canvas = this.canvasRef.current;
-      const width = container.offsetWidth;
-      this.setState({
-        scale: Math.floor(width / 1587 * 100) / 100
-      });
+      if (container) {
+        const width = container.offsetWidth;
+        const scale = Math.floor(width / 1587 * 100) / 100;
+        this.setState({ scale });
+      }
     },
     100,
     {
@@ -52,18 +53,12 @@ export default class CanvasContainer extends React.Component {
   componentDidMount() {
     const { id, data } = this.props;
     if (data) {
-      console.log(data);
       this.setState({ data });
+      this._scale();
     } else if (id) {
       this._update(id);
       this._scale();
       window.addEventListener("resize", this._scale);
-    }
-  }
-  componentWillUnmount() {
-    const { id } = this.props;
-    if (id) {
-      window.removeEventListener("resize", this._scale);
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -75,6 +70,13 @@ export default class CanvasContainer extends React.Component {
           data: null
         });
       }
+    }
+    this._scale();
+  }
+  componentWillUnmount() {
+    const { id } = this.props;
+    if (id) {
+      window.removeEventListener("resize", this._scale);
     }
   }
   render() {

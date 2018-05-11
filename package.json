@@ -1,7 +1,7 @@
 {
   "name": "electoral-canvas",
-  "version": "0.0.1",
-  "description": "## Electoral Canvas",
+  "version": "0.1.0",
+  "description": "Electoral canvas methodology built with react-flexcanvas and puppeteer.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node --presets es2015,stage-0",
