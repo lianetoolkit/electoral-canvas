@@ -8,12 +8,14 @@ import path from "path";
 
 import example from "./example.json";
 
+const PORT = process.env.PORT || 8000;
+
 const VERSION =
   process.env.VERSION ||
   require(path.resolve(__dirname, "../package.json")).version;
 const FILES_DIR = path.join(__dirname, "../files");
 const FORMATS = ["A3", "A2"];
-const URL = process.env.URL || "http://localhost:8000";
+const URL = process.env.URL || `http://localhost:${PORT}`;
 const REDIS = process.env.REDIS || "redis://localhost:6379/electoral-canvas";
 
 let puppeteerConfig = {
