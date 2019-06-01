@@ -133,17 +133,17 @@ export default class Canvas extends React.Component {
       <FlexCanvas data={data || {}}>
         <FlexCanvas.Row grow={1} widths="equal" color="blue" attached="top">
           <FlexCanvas.Item
-            title="Nome da candidata"
+            title="Nombre de la candidata"
             color="blue"
             dataKey="basic_info.name_bb"
           />
           <FlexCanvas.Item
-            title="Cargo que concorre"
+            title="Cargo que compite"
             color="blue"
             dataKey="basic_info.electoral_post"
           />
           <FlexCanvas.Item
-            title="Local"
+            title="Lugar"
             color="blue"
             dataKey="basic_info.location"
           />
@@ -162,14 +162,14 @@ export default class Canvas extends React.Component {
           <FlexCanvas.Column grow={5}>
             <FlexCanvas.Row grow={2}>
               <FlexCanvas.Item
-                title="Princípios"
+                title="Principios"
                 color="pink"
                 grow={1}
                 // icon={<span className="fa fa-check-circle" />}
                 dataKey="principles"
                 details={<Details.Principles />}
               >
-                <FlexCanvas.List title="Princípio" amount={3} />
+                <FlexCanvas.List title="Principio" amount={3} />
               </FlexCanvas.Item>
               <FlexCanvas.Item
                 title="Candidata"
@@ -191,29 +191,29 @@ export default class Canvas extends React.Component {
                 </FlexCanvas.FieldGroup>
                 <FlexCanvas.FieldGroup>
                   <FlexCanvas.Field
-                    title="Um talento"
+                    title="Un talento"
                     dataKey="candidate.talent"
                   />
                   <FlexCanvas.Field
-                    title="Uma limitação"
+                    title="Una limitación"
                     dataKey="candidate.limitation"
                   />
                 </FlexCanvas.FieldGroup>
                 <FlexCanvas.Field
-                  title="Uma experiência de vida"
+                  title="Una experiencia de vida"
                   grow={2}
                   dataKey="candidate.life_experience"
                   format={this._format()}
                 />
               </FlexCanvas.Item>
               <FlexCanvas.Item
-                title="Diferenciais de campanha"
+                title="Diferenciales de campaña"
                 grow={1}
                 // icon={<span className="fa fa-cubes" />}
                 details={<Details.Assets />}
               >
                 <FlexCanvas.Field
-                  title="O que eu tenho que meus competidores não tem"
+                  title="Lo que tengo que mis competidores no tiene"
                   dataKey="assets"
                   format={this._format()}
                 />
@@ -231,17 +231,17 @@ export default class Canvas extends React.Component {
                 <FlexCanvas.List title="Causa" amount={3} />
               </FlexCanvas.Item>
               <FlexCanvas.Item
-                title="Compromissos"
+                title="Compromisos"
                 color="pink"
                 grow={1}
                 // icon={<span className="fa fa-list-alt" />}
                 dataKey="commitments"
                 details={<Details.Commitments />}
               >
-                <FlexCanvas.List title="Compromisso" amount={3} />
+                <FlexCanvas.List title="Compromiso" amount={3} />
               </FlexCanvas.Item>
               <FlexCanvas.Item
-                title="Eleitorado"
+                title="Electorado"
                 color="red"
                 grow={3}
                 // icon={<span className="fa fa-filter" />}
@@ -254,27 +254,27 @@ export default class Canvas extends React.Component {
             </FlexCanvas.Row>
             <FlexCanvas.Row grow={1}>
               <FlexCanvas.Item
-                title="Quanto vai custar sua campanha?"
+                title="¿Cuánto va a costar su campaña?"
                 grow={2.5}
                 // icon={<span className="fa fa-money" />}
                 color="green"
                 details={<Details.Expense />}
               >
                 <FlexCanvas.Field
-                  title="Valor total de custo"
+                  title="Valor total de coste"
                   dataKey="funds.expense"
                   format={this._format()}
                 />
               </FlexCanvas.Item>
               <FlexCanvas.Item
-                title="Como você vai arrecadar?"
+                title="¿Cómo vas a recoger?"
                 grow={4.5}
                 // icon={<span className="fa fa-money" />}
                 color="green"
                 details={<Details.Funders />}
               >
                 <FlexCanvas.Field
-                  title="Lista de atividades de captação"
+                  title="Lista de actividades de captación"
                   dataKey="funds.funders"
                   format={this._format()}
                 />
@@ -288,16 +288,16 @@ export default class Canvas extends React.Component {
               dataKey="competitors"
               details={<Details.Competitors />}
             >
-              <FlexCanvas.Table columns={["Nome", "Partido"]} />
+              <FlexCanvas.Table columns={["Nombre", "Partido"]} />
             </FlexCanvas.Item>
             <FlexCanvas.Item
-              title="Equipe"
+              title="Equipo"
               // icon={<span className="fa fa-users" />}
               dataKey="team"
               format={this._format("team")}
               details={<Details.Team />}
             >
-              <FlexCanvas.Table columns={["Nome", "Cargo"]} />
+              <FlexCanvas.Table columns={["Nombre", "Cargo"]} />
             </FlexCanvas.Item>
           </FlexCanvas.Column>
         </FlexCanvas.Row>

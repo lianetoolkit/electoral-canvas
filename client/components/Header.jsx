@@ -32,12 +32,12 @@ class Header extends React.Component {
             <Link to="/">LIANE</Link>
           </h1>
           <h2>
-            <Link to="/">Canvas Eleitoral</Link>
+            <Link to="/">Canvas Electoral</Link>
           </h2>
         </div>
         <div className="divider" />
         <nav className="header-nav">
-          <Link to="/example">Veja um exemplo</Link>
+          <Link to="/example">Ejemplo</Link>
         </nav>
         <nav className="download">
           <span className="fa fa-download" />
