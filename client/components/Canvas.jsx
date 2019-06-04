@@ -153,7 +153,7 @@ export default class Canvas extends React.Component {
             dataKey="basic_info.party_name"
           />
           <FlexCanvas.Item
-            title="Número"
+            title="Número en la lista"
             color="blue"
             dataKey="basic_info.number"
           />
@@ -213,7 +213,7 @@ export default class Canvas extends React.Component {
                 details={<Details.Assets />}
               >
                 <FlexCanvas.Field
-                  title="Lo que tengo que mis competidores no tiene"
+                  title="Lo que tengo que mis competidores no tienen"
                   dataKey="assets"
                   format={this._format()}
                 />
@@ -267,7 +267,7 @@ export default class Canvas extends React.Component {
                 />
               </FlexCanvas.Item>
               <FlexCanvas.Item
-                title="¿Cómo vas a recoger?"
+                title="¿Cómo vas a recaudar fondos?"
                 grow={4.5}
                 // icon={<span className="fa fa-money" />}
                 color="green"
