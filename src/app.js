@@ -4,7 +4,8 @@ import Redis from "ioredis";
 import puppeteer from "puppeteer";
 import crypto from "crypto";
 import fs from "fs";
-import path from "path";
+import Path from "path";
+import { exec } from "./utils";
 
 import example from "./example.json";
 
@@ -12,14 +13,20 @@ const PORT = process.env.PORT || 8000;
 
 const VERSION =
   process.env.VERSION ||
-  require(path.resolve(__dirname, "../package.json")).version;
-const FILES_DIR = path.join(__dirname, "../files");
-const FORMATS = ["A3", "A2"];
+  require(Path.resolve(__dirname, "../package.json")).version;
+const FILES_DIR = Path.join(__dirname, "../files");
+const FORMATS = ["A3", "A2", "A1"];
+const MAP_FORMAT_SIZES = {
+  A1: [594, 841],
+  A2: [420, 594],
+  A3: [297, 420],
+  A4: [210, 297]
+};
 const URL = process.env.URL || `http://localhost:${PORT}`;
 const REDIS = process.env.REDIS || "redis://localhost:6379/electoral-canvas";
 
 let puppeteerConfig = {
-  args: ["--no-sandbox", "--disable-setuid-sandbox"]
+  args: ["--no-sandbox", "--disable-setuid-sandbox"],
 };
 
 if (process.env.CHROMIUM_PATH) {
@@ -51,25 +58,39 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const getCanvasPath = (name, format) => {
-  return path.join(FILES_DIR, `canvas-${name}-${format}.pdf`);
+  return Path.join(FILES_DIR, `canvas-${name}-${format}.pdf`);
 };
 
-const render = async function(id, name, format) {
+const render = async function (id, name, format) {
+  const path = getCanvasPath(id || name, format);
   const pageUrl = id ? URL + "/" + id : URL;
   const browser = await puppeteer.launch(puppeteerConfig);
   const page = await browser.newPage();
   await page.goto(pageUrl);
   await page.pdf({
-    path: getCanvasPath(id || name, format),
+    path,
     format,
     scale: 1,
     landscape: true,
-    printBackground: true
+    printBackground: true,
   });
   await browser.close();
+  await a4tile(id || name, path, format);
 };
 
-const renderCanvas = async function(id, name) {
+const a4tile = async function (id, path, format) {
+  let mediaSize = [210, 297];
+  const output = Path.join(FILES_DIR, `canvas-${id}-${format}-A4.pdf`);
+  if (format == "A1") mediaSize = [210.25, 297];
+  if (format == "A3") mediaSize = [297, 210];
+  return await exec(
+    `pdfposter -m ${mediaSize.join("x")}mm -p ${MAP_FORMAT_SIZES[format].join(
+      "x"
+    )}mm ${path} ${output}`
+  );
+};
+
+const renderCanvas = async function (id, name) {
   for (const format of FORMATS) {
     const exists = await new Promise((resolve, reject) => {
       fs.open(getCanvasPath(id || name, format), "r", (err, fd) => {
@@ -87,31 +108,34 @@ const renderCanvas = async function(id, name) {
   }
 };
 
-const parseFromLiane = function(canvas) {
+const parseFromLiane = function (canvas) {
   let result = { ...canvas };
   if (result.basic_info && result.basic_info.location) {
     result.basic_info.location = result.basic_info.location.city.name;
   }
   if (result.commitments && result.commitments.commitments) {
-    result.commitments = result.commitments.commitments.map(c => c.title);
+    result.commitments = result.commitments.commitments.map((c) => c.title);
   }
   if (result.causes && result.causes.causes) {
-    result.causes = result.causes.causes.map(c => c.title);
+    result.causes = result.causes.causes.map((c) => c.title);
   }
   if (result.principles && result.principles.principles) {
-    result.principles = result.principles.principles.map(p => p.title);
+    result.principles = result.principles.principles.map((p) => p.title);
   }
   if (result.assets && result.assets.assets) {
-    result.assets = result.assets.assets.map(p => p.description).join(";\n");
+    result.assets = result.assets.assets.map((p) => p.description).join(";\n");
   }
   if (result.network && result.network.competitors) {
-    result.competitors = result.network.competitors.map(c => [c.name, c.party]);
+    result.competitors = result.network.competitors.map((c) => [
+      c.name,
+      c.party,
+    ]);
   }
   if (result.team && result.team.team) {
-    result.team = result.team.team.map(t => [t.name, t.role]);
+    result.team = result.team.team.map((t) => [t.name, t.role]);
   }
   if (result.potential_voter && result.potential_voter.profiles) {
-    result.electorate = result.potential_voter.profiles.map(profile => {
+    result.electorate = result.potential_voter.profiles.map((profile) => {
       return {
         ...profile,
         location: {
@@ -126,8 +150,8 @@ const parseFromLiane = function(canvas) {
           locus:
             profile.territory && profile.territory.locus
               ? profile.territory.locus
-              : ""
-        }
+              : "",
+        },
       };
     });
   }
@@ -154,14 +178,14 @@ app.post("/", (req, res) => {
   const id = hash.substr(0, 7);
   let fromCache = false;
 
-  redis.get(id).then(payload => {
+  redis.get(id).then((payload) => {
     fromCache = !!payload;
     payload = payload
       ? JSON.parse(payload)
       : {
           id,
           key: hash,
-          data: canvas
+          data: canvas,
         };
     if (!fromCache) {
       redis.set(payload.id, JSON.stringify(payload));
@@ -174,7 +198,7 @@ app.post("/", (req, res) => {
           res.redirect(`/${payload.id}`);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         res.status(500).send(err);
       });
   });
@@ -184,14 +208,14 @@ app.get(/^\/(\b[0-9a-f]{5,40}\b)$/, (req, res) => {
   const id = req.params[0];
   redis
     .get(id)
-    .then(payload => {
+    .then((payload) => {
       if (!payload) {
         res.status(404).send("Not Found");
       } else {
         res.send(JSON.parse(payload).data);
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send(err);
     });
 });

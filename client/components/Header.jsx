@@ -1,6 +1,8 @@
 import React from "react";
 import { withRouter, matchPath, Link } from "react-router-dom";
 
+const logo = require("images/logo-white.svg");
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,7 @@ class Header extends React.Component {
   render() {
     return (
       <header id="app-header">
-        <img src={require("images/logo-white.svg")} />
+        <img src={logo.default} />
         <div className="title">
           <h1>
             <Link to="/">LIANE</Link>
@@ -41,6 +43,9 @@ class Header extends React.Component {
         </nav>
         <nav className="download">
           <span className="fa fa-download" />
+          <a href="#">
+            <span className="fa fa-file-pdf-o" /> Escolher formato para download
+          </a>
           <a href={this._getPDFUrl("A3")}>
             <span className="fa fa-file-pdf-o" /> A3
             <span className="label">Recomendado</span>
