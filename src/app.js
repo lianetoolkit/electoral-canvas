@@ -17,10 +17,10 @@ const VERSION =
 const FILES_DIR = Path.join(__dirname, "../files");
 const FORMATS = ["A3", "A2", "A1"];
 const MAP_FORMAT_SIZES = {
-  A1: [594, 841],
-  A2: [420, 594],
-  A3: [297, 420],
-  A4: [210, 297]
+  A1: [841, 594],
+  A2: [594, 420],
+  A3: [420, 297],
+  A4: [297, 210],
 };
 const URL = process.env.URL || `http://localhost:${PORT}`;
 const REDIS = process.env.REDIS || "redis://localhost:6379/electoral-canvas";
@@ -29,8 +29,8 @@ let puppeteerConfig = {
   args: ["--no-sandbox", "--disable-setuid-sandbox"],
 };
 
-if (process.env.CHROMIUM_PATH) {
-  puppeteerConfig.executablePath = process.env.CHROMIUM_PATH;
+if (process.env.CHROME_PATH) {
+  puppeteerConfig.executablePath = process.env.CHROME_PATH;
 }
 
 /*
@@ -79,15 +79,21 @@ const render = async function (id, name, format) {
 };
 
 const a4tile = async function (id, path, format) {
-  let mediaSize = [210, 297];
   const output = Path.join(FILES_DIR, `canvas-${id}-${format}-A4.pdf`);
-  if (format == "A1") mediaSize = [210.25, 297];
-  if (format == "A3") mediaSize = [297, 210];
-  return await exec(
-    `pdfposter -m ${mediaSize.join("x")}mm -p ${MAP_FORMAT_SIZES[format].join(
-      "x"
-    )}mm ${path} ${output}`
-  );
+  let box = [1, 1];
+  switch (format) {
+    case "A1":
+      box = [4, 2];
+      break;
+    case "A2":
+      box = [2, 2];
+      break;
+    case "A3":
+      box = [2, 1];
+      break;
+    default:
+  }
+  return await exec(`pdfposter -mA4 -p${box[0]}x${box[1]}a4 ${path} ${output}`);
 };
 
 const renderCanvas = async function (id, name) {

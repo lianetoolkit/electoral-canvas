@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
 
+import { withRouter, matchPath, Link } from "react-router-dom";
+
 const FORMATS = {
   A1: {
     size: "841x594mm",
@@ -23,13 +25,41 @@ const Container = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.8);
   overflow: auto;
   h2 {
     font-size: 1em;
-    text-align: center;
-    margin: 0 0 4rem;
+    margin: 0 0 0.5rem;
+    font-weight: 600;
   }
+  p {
+    color: #999;
+    margin: 0 0 1rem;
+  }
+  .close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .selector-container {
+    border-top: 1px solid #333;
+    padding: 2rem;
+  }
+`;
+
+const Content = styled.section`
+  max-width: 600px;
+  padding: 2rem;
+  background: #222;
+  color: #f0f0f0;
+  margin: 4rem auto;
+  box-shadow: 0 0 4rem rgba(0, 0, 0, 0.5);
+  border-radius: 7px;
+  border: 1px solid #333;
+  position: relative;
+  z-index: 10;
 `;
 
 const Button = styled.a`
@@ -37,7 +67,7 @@ const Button = styled.a`
   color: rgba(255, 255, 255, 0.7);
   padding: 1rem;
   border-radius: 7px;
-  margin: 2rem 0 0;
+  margin: 0;
   display: block;
   text-align: center;
   text-decoration: none;
@@ -58,22 +88,11 @@ const Button = styled.a`
     `}
 `;
 
-const Content = styled.div`
-  max-width: 600px;
-  padding: 4rem;
-  background: #222;
-  color: #f0f0f0;
-  margin: 6rem auto;
-  box-shadow: 0 0 4rem rgba(0, 0, 0, 0.5);
-  border-radius: 7px;
-  border: 1px solid #333;
-`;
-
 const PaperSelector = styled.div`
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
   position: relative;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   &.has-format {
     .papers .paper-container .paper {
       opacity: 0.3;
@@ -81,7 +100,7 @@ const PaperSelector = styled.div`
     }
     .papers .paper-container.selected .paper {
       opacity: 1;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255, 255, 255, 0.05);
       border-color: #1eaedb;
       box-shadow: 0 0 0.6rem #1eaedb;
     }
@@ -89,7 +108,7 @@ const PaperSelector = styled.div`
   .papers {
     position: relative;
     width: 100%;
-    padding-top: 70.63%;
+    padding-top: 70.707%;
     .paper-container {
       position: absolute;
       bottom: 0;
@@ -97,10 +116,10 @@ const PaperSelector = styled.div`
       width: 100%;
       box-sizing: border-box;
       &:nth-child(2) {
-        width: 70.417%;
+        width: 70.707%;
       }
       &:nth-child(3) {
-        width: 49.71%;
+        width: 50%;
       }
       &:focus,
       &:active,
@@ -134,7 +153,7 @@ const PaperSelector = styled.div`
         .name {
           font-weight: 600;
           font-size: 1.2em;
-          margin-right: 1rem;
+          margin: 0 1rem;
         }
         .size {
           font-size: 0.8em;
@@ -229,66 +248,78 @@ class Download extends Component {
     }
     return `/files/${filename}.pdf`;
   };
+  _handleCloseClick = (ev) => {
+    ev.preventDefault();
+    const { onClose } = this.props;
+    onClose && onClose();
+  };
   render() {
+    const { location } = this.props;
     const { tiled, selectedFormat } = this.state;
     return (
       <Container>
+        <Link className="close" to={location.pathname} />
         <Content>
-          <h2>Selecione um tamanho</h2>
-          <PaperSelector className={selectedFormat ? "has-format" : ""}>
-            <div className="papers">
-              {Object.keys(FORMATS).map((format) => (
-                <div
-                  tabIndex="-1"
-                  key={format}
-                  className={`paper-container ${
-                    format == selectedFormat ? "selected" : ""
-                  }`}
-                  onClick={this._setFormat(format)}
-                >
-                  <div className="paper">
-                    {tiled && selectedFormat == format ? (
-                      <Grid
-                        cols={FORMATS[format].grid[0]}
-                        rows={FORMATS[format].grid[1]}
-                      />
-                    ) : null}
-                    <div className="info">
-                      <span className="name">{format}</span>
-                      <span className="size">{FORMATS[format].size}</span>
+          <header>
+            <h2>Download para impressão</h2>
+            <p>Escolha abaixo como deseja baixar em PDF:</p>
+          </header>
+          <section className="selector-container">
+            <PaperSelector className={selectedFormat ? "has-format" : ""}>
+              <div className="papers">
+                {Object.keys(FORMATS).map((format) => (
+                  <div
+                    tabIndex="-1"
+                    key={format}
+                    className={`paper-container ${
+                      format == selectedFormat ? "selected" : ""
+                    }`}
+                    onClick={this._setFormat(format)}
+                  >
+                    <div className="paper">
+                      {tiled && selectedFormat == format ? (
+                        <Grid
+                          cols={FORMATS[format].grid[0]}
+                          rows={FORMATS[format].grid[1]}
+                        />
+                      ) : null}
+                      <div className="info">
+                        <span className="name">{format}</span>
+                        <span className="size">{FORMATS[format].size}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </PaperSelector>
-          <SelectOutput>
-            <label>
-              <input
-                type="radio"
-                name="output"
-                checked={!tiled}
-                onChange={this._handleOutputChange}
-                value="full"
-              />
-              Formato completo
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="output"
-                checked={tiled}
-                onChange={this._handleOutputChange}
-                value="tiled"
-              />
-              Recortar para folhas{" "}
-              {selectedFormat
-                ? FORMATS[selectedFormat].grid[0] *
-                  FORMATS[selectedFormat].grid[1]
-                : ""}{" "}
-              em tamanho A4
-            </label>
-          </SelectOutput>
+                ))}
+              </div>
+            </PaperSelector>
+            <SelectOutput>
+              <label>
+                <input
+                  type="radio"
+                  name="output"
+                  checked={!tiled}
+                  onChange={this._handleOutputChange}
+                  value="full"
+                />
+                Formato completo
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="output"
+                  checked={tiled}
+                  onChange={this._handleOutputChange}
+                  value="tiled"
+                />
+                Recortar para{" "}
+                {selectedFormat
+                  ? FORMATS[selectedFormat].grid[0] *
+                    FORMATS[selectedFormat].grid[1]
+                  : ""}{" "}
+                folhas em tamanho A4
+              </label>
+            </SelectOutput>
+          </section>
           <Button disabled={!selectedFormat} href={this._getUrl()}>
             <span className="fa fa-file-pdf-o" />
             {!selectedFormat ? (
@@ -306,4 +337,4 @@ class Download extends Component {
   }
 }
 
-export default Download;
+export default withRouter(Download);

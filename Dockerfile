@@ -1,46 +1,43 @@
-FROM node:14-alpine
+FROM node:14-slim
 
 ARG UID=991
 ARG GID=991
 
 ENV NODE_ENV=production
 ENV URL=http://localhost:8000
-ENV CHROMIUM_PATH=/usr/bin/chromium-browser
+ENV CHROME_PATH=/usr/bin/google-chrome-unstable
 
-EXPOSE 3030
-
-WORKDIR /canvas
-
-RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
-  && apk -U upgrade \
-  && apk add --no-cache \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+    gnupg2 \
+    pdfposter \
+    wget \
     ca-certificates \
     file \
-    git \
-    su-exec \
-    tini \
-    # chromium
-    nss@edge \
-    chromium-chromedriver@edge \
-    chromium@edge \
-  && update-ca-certificates \
-  && rm -rf /tmp/* /var/cache/apk/*
+  && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+  && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+  && apt-get update \
+  && apt-get install -y google-chrome-unstable --no-install-recommends \
+  && rm -rf /var/lib/apt/lists/*
 
-RUN addgroup -g ${GID} canvas \
-  && adduser -h /canvas -s /bin/sh -D -G canvas -u ${UID} canvas
+# Add tini
+ENV TINI_VERSION="0.18.0"
+ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+
+RUN groupadd -g $GID canvas \
+  && useradd -m -d /canvas -s /bin/sh -g $GID -u $UID canvas
 
 # Copy files
-COPY . /canvas
+COPY --chown=canvas:canvas . /canvas
+
+USER canvas
+WORKDIR /canvas
 
 # Install app dependencies
 RUN npm install --production=false \
   && npm run build
 
-RUN chown -R canvas:canvas /canvas
-
-USER canvas
-
-ENTRYPOINT ["/sbin/tini", "--"]
-
-# Run node server
+ENTRYPOINT ["/tini", "--"]
+EXPOSE 8000
 CMD ["node", "dist/index.js"]

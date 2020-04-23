@@ -7,7 +7,7 @@
     "start": "nodemon src/index.js --exec babel-node",
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "rm -rf public/* dist/*",
-    "build": "npm run setup && cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production && babel src -d dist --presets es2015,stage-0 --copy-files",
+    "build": "npm run setup && cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production && babel src -d dist --copy-files",
     "serve": "cross-env NODE_ENV=production node dist/index.js"
   },
   "repository": {
@@ -38,7 +38,7 @@
     "html-webpack-plugin": "^4.2.0",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.0",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.4",
     "webpack": "^4.43.0",

@@ -68,13 +68,13 @@ h4 {
   }
   .header-nav {
     margin-right: 4rem;
-    font-size: .9em;
+    font-size: 0.9em;
     a {
       display: inline-block;
       background: #111;
       color: #f0f0f0;
       text-decoration: none;
-      padding: .5rem 1.5rem;
+      padding: 0.5rem 1.5rem;
       border-radius: 4px;
       &:hover {
         background: #060606;
@@ -83,10 +83,8 @@ h4 {
     }
   }
   .download {
-    text-transform: uppercase;
     font-size: 0.8em;
     color: #999;
-    letter-spacing: 0.2rem;
     display: flex;
     align-items: center;
     .fa {
@@ -98,13 +96,15 @@ h4 {
       margin: 0 0 0 1rem;
       border: 1px solid rgba(0, 0, 0, 0.5);
       border-radius: 4px;
-      color: #f0f0f0;
+      color: rgba(255, 255, 255, 0.7);
       text-decoration: none;
       outline: none;
+      font-weight: 600;
+      background: #fe754a;
       &:hover,
       &:active,
       &:focus {
-        background: #000;
+        color: #fff;
         box-shadow: 0 0 1rem #090909;
       }
       .fa {
@@ -115,7 +115,6 @@ h4 {
     }
     .label {
       font-size: 0.7em;
-      letter-spacing: 0.1rem;
       margin-right: -0.5rem;
       background: rgba(255, 255, 255, 0.075);
       padding: 0.25rem 0.5rem;
@@ -248,7 +247,7 @@ h4 {
   }
   #app-footer {
     padding: 0.25rem 0;
-    box-shadow: 0 0 5rem rgba(0,0,0,0.5);
+    box-shadow: 0 0 5rem rgba(0, 0, 0, 0.5);
   }
 }
 

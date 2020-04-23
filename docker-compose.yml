@@ -8,8 +8,6 @@ services:
     - redis
     ports:
     - 8000:8000
-    volumes:
-    - ./.data/files:/canvas/files
     environment:
       REDIS: "redis://redis:6379"
   redis:

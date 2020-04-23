@@ -7,12 +7,12 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: null
+      id: null,
     };
   }
   _setId(id) {
     this.setState({
-      id: id.substr(1)
+      id: id.substr(1),
     });
   }
   _getPDFUrl(format) {
@@ -26,6 +26,8 @@ class Header extends React.Component {
     this._setId(nextProps.location.pathname);
   }
   render() {
+    const { location } = this.props;
+    console.log(this.props);
     return (
       <header id="app-header">
         <img src={logo.default} />
@@ -43,16 +45,9 @@ class Header extends React.Component {
         </nav>
         <nav className="download">
           <span className="fa fa-download" />
-          <a href="#">
-            <span className="fa fa-file-pdf-o" /> Escolher formato para download
-          </a>
-          <a href={this._getPDFUrl("A3")}>
-            <span className="fa fa-file-pdf-o" /> A3
-            <span className="label">Recomendado</span>
-          </a>
-          <a href={this._getPDFUrl("A2")}>
-            <span className="fa fa-file-pdf-o" /> A2
-          </a>
+          <Link to={`${location.pathname}?download=1`}>
+            <span className="fa fa-file-pdf-o" /> Download para impressão
+          </Link>
         </nav>
       </header>
     );
