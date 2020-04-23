@@ -27,14 +27,27 @@ const Container = styled.div`
   bottom: 0;
   background: rgba(0, 0, 0, 0.8);
   overflow: auto;
+  header {
+    display: flex;
+    align-items: center;
+    margin: 0 0 2rem;
+    .icon {
+      width: 3rem;
+      flex: 0 0 auto;
+      margin: 0 2rem 0 1rem;
+      font-size: 2em;
+      color: #999;
+    }
+  }
   h2 {
     font-size: 1em;
-    margin: 0 0 0.5rem;
+    margin: 0;
     font-weight: 600;
   }
   p {
     color: #999;
-    margin: 0 0 1rem;
+    margin: 0;
+    font-size: 0.9em;
   }
   .close {
     position: absolute;
@@ -42,10 +55,6 @@ const Container = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-  }
-  .selector-container {
-    border-top: 1px solid #333;
-    padding: 2rem;
   }
 `;
 
@@ -89,8 +98,7 @@ const Button = styled.a`
 `;
 
 const PaperSelector = styled.div`
-  width: 80%;
-  margin: 0 auto;
+  margin: 0 6rem;
   position: relative;
   background: rgba(255, 255, 255, 0.05);
   &.has-format {
@@ -183,7 +191,8 @@ const SelectOutput = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 3rem 0 0;
+  margin: 2rem 0;
+  font-size: 0.9em;
   label {
     padding: 0 2rem;
     display: flex;
@@ -261,8 +270,13 @@ class Download extends Component {
         <Link className="close" to={location.pathname} />
         <Content>
           <header>
-            <h2>Download para impressão</h2>
-            <p>Escolha abaixo como deseja baixar em PDF:</p>
+            <div className="icon">
+              <span className="fa fa-download" />
+            </div>
+            <div className="text">
+              <h2>Baixar para impressão</h2>
+              <p>Escolha abaixo como deseja baixar em PDF:</p>
+            </div>
           </header>
           <section className="selector-container">
             <PaperSelector className={selectedFormat ? "has-format" : ""}>

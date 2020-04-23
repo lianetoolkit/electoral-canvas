@@ -46,7 +46,7 @@ class Header extends React.Component {
         <nav className="download">
           <span className="fa fa-download" />
           <Link to={`${location.pathname}?download=1`}>
-            <span className="fa fa-file-pdf-o" /> Download para impressão
+            <span className="fa fa-file-pdf-o" /> Baixar para impressão
           </Link>
         </nav>
       </header>
