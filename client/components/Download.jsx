@@ -34,7 +34,7 @@ const Container = styled.div`
 
 const Button = styled.a`
   background: #fe754a;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
   padding: 1rem;
   border-radius: 7px;
   margin: 2rem 0 0;
@@ -73,13 +73,17 @@ const PaperSelector = styled.div`
   width: 70%;
   margin: 0 auto;
   position: relative;
+  background: rgba(255,255,255,0.05);
   &.has-format {
     .papers .paper-container .paper {
       opacity: 0.3;
+      border-color: #222;
     }
     .papers .paper-container.selected .paper {
       opacity: 1;
-      background: #333;
+      background: rgba(255,255,255,0.05);
+      border-color: #1eaedb;
+      box-shadow: 0 0 0.6rem #1eaedb;
     }
   }
   .papers {
@@ -134,6 +138,7 @@ const PaperSelector = styled.div`
         }
         .size {
           font-size: 0.8em;
+          color: #666;
         }
       }
     }
@@ -149,8 +154,8 @@ const GridContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   .item {
-    border-right: 1px dashed rgba(255, 255, 255, 0.1);
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    border-right: 1px dashed rgba(255, 255, 255, 0.2);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
     box-sizing: border-box;
   }
 `;
@@ -242,7 +247,7 @@ class Download extends Component {
                   onClick={this._setFormat(format)}
                 >
                   <div className="paper">
-                    {tiled ? (
+                    {tiled && selectedFormat == format ? (
                       <Grid
                         cols={FORMATS[format].grid[0]}
                         rows={FORMATS[format].grid[1]}
