@@ -93,7 +93,7 @@ const a4tile = async function (id, path, format) {
       break;
     default:
   }
-  return await exec(`pdfposter -mA4 -p${box[0]}x${box[1]}a4 ${path} ${output}`);
+  await exec(`pdfposter -mA4 -p${box[0]}x${box[1]}a4 ${path} ${output}`);
 };
 
 const renderCanvas = async function (id, name) {

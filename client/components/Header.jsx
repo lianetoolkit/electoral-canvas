@@ -27,7 +27,6 @@ class Header extends React.Component {
   }
   render() {
     const { location } = this.props;
-    console.log(this.props);
     return (
       <header id="app-header">
         <img src={logo.default} />
