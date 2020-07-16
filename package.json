@@ -52,7 +52,7 @@
     "express": "^4.17.1",
     "font-awesome": "^4.7.0",
     "ioredis": "^4.16.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "nodemon": "^2.0.3",
     "puppeteer": "^3.0.1",
     "react": "^16.13.1",
